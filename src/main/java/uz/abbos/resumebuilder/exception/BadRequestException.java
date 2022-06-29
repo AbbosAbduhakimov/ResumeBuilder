@@ -1,7 +1,7 @@
 package uz.abbos.resumebuilder.exception;
 
-public class BadRequestHandler extends RuntimeException{
-    public BadRequestHandler(String message) {
+public class BadRequestException extends RuntimeException{
+    public BadRequestException(String message) {
         super(message);
     }
 }

@@ -6,15 +6,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.abbos.resumebuilder.dao.UserDao;
 import uz.abbos.resumebuilder.dto.UserDto;
+import uz.abbos.resumebuilder.exception.BadRequestException;
 import uz.abbos.resumebuilder.model.User;
 
 import java.util.Optional;
 
 @Service("userService")
-public class UserServiceImpl  {
+public class UserService {
 
     @Autowired
-    public UserServiceImpl(ModelMapper modelMapper, UserDao userDao) {
+    public UserService(ModelMapper modelMapper, UserDao userDao) {
         this.modelMapper = modelMapper;
         this.userDao = userDao;
     }
@@ -28,7 +29,7 @@ public class UserServiceImpl  {
     public UserDto get(Long id) {
         User user =  userDao.findUser(id);
         if (user == null){
-            throw new RuntimeException("User not found");
+            throw new BadRequestException("User not found");
         }
         UserDto userDto = modelMapper.map(user, UserDto.class);
         return userDto;
@@ -42,7 +43,7 @@ public class UserServiceImpl  {
             return userDao.saveUser(user);
         }
         catch (Exception e){
-            throw new RuntimeException("User create failed");
+            throw new BadRequestException("User create failed");
         }
     }
 
@@ -53,7 +54,7 @@ public class UserServiceImpl  {
             return userDao.updateUser(user);
         }
         catch (Exception e){
-            throw new RuntimeException("User update failed");
+            throw new BadRequestException("User update failed");
         }
     }
 
@@ -65,10 +66,10 @@ public class UserServiceImpl  {
     }
 
 
-    private User check(Long id) {
+    public User check(Long id) {
         Optional<User> optional = Optional.ofNullable(userDao.findUser(id));
         if (optional.isEmpty()){
-            throw new RuntimeException("User not found");
+            throw new BadRequestException("User not found");
         }
         return optional.get();
     }

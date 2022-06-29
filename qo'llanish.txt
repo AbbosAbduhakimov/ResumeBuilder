@@ -1,0 +1,3 @@
+ResumeBuilder
+Resume lar resume api orqali to'ldiriladi kerakli kompaniya yoki o'quv muassasa id beriladi
+yoki resume api orqali yaratilinadi

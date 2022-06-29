@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: abbos_j
+    password: abbos9113
+    url: jdbc:postgresql://localhost:5432/resume_builder_db
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl.auto: create
+#        servlet:
+#          multipart:
+#            max-file-size: 5MB
+#              max-request-size: 5MB
